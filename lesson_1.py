@@ -27,9 +27,7 @@ pt = {
     '5': (8, 3)
 }
 
-count = 0
-min_distance = float('inf')
-min_path = None
+count, min_distance, min_path = 0, float('inf'), None
 for path in all_ways():
     now_distance = calculate_total_distance(*path)
     if now_distance < min_distance:

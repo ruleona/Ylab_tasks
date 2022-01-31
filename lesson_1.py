@@ -14,6 +14,11 @@ def calculate_total_distance(A, B, C, D):
     return distance_btwn_points((0, 2), pt[A]) + distance_btwn_points(pt[A], pt[B]) + distance_btwn_points(pt[B], pt[C]) + distance_btwn_points(pt[C], pt[D]) + distance_btwn_points(pt[D], (0, 2))
 
 
+def print_path(point_1, point_2):
+    global count
+    count += distance_btwn_points(point_1, point_2)
+    print(f' -> {point_2}[{count}]', end='')
+
 pt = {
     '1': (0, 2),
     '2': (2, 5),
@@ -22,6 +27,7 @@ pt = {
     '5': (8, 3)
 }
 
+count = 0
 min_distance = float('inf')
 min_path = None
 for path in all_ways():
@@ -29,14 +35,11 @@ for path in all_ways():
     if now_distance < min_distance:
         min_path = path
         min_distance = now_distance
+min_path = list(min_path)
+min_path.insert(0, '1')
+min_path.append('1')
 
-count_1 = distance_btwn_points(pt['1'], pt[min_path[0]])
-count_2 = distance_btwn_points(pt[min_path[0]], pt[min_path[1]]) + count_1
-count_3 = distance_btwn_points(pt[min_path[1]], pt[min_path[2]]) + count_2
-count_4 = distance_btwn_points(pt[min_path[2]], pt[min_path[3]]) + count_3
-
-print(f'{pt["1"]} -> {pt[min_path[0]]}[{count_1}] -> '
-	f'{pt[min_path[1]]}[{count_2}] -> '
-    f'{pt[min_path[2]]}[{count_3}] -> '
-    f'{pt[min_path[3]]}[{count_4}] -> '
-    f'{pt["1"]}[{min_distance}] = {min_distance}')
+print(f'{pt["1"]}', end='')
+for i in range(len(min_path) - 1):
+    print_path(pt[min_path[i]], pt[min_path[i + 1]])
+print(f' = {min_distance}')

@@ -3,7 +3,7 @@ import itertools
 
 
 def all_ways():
-    return list(list(itertools.permutations(['2', '3', '4', '5'])))
+    return list(itertools.permutations(['2', '3', '4', '5']))
 
 
 def distance_btwn_points(point_1, point_2):
